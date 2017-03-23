@@ -20,3 +20,10 @@
     dest: /usr/local/bin/ecs-cli
     mode: 0755
   when: aws_ecs_cli_enabled
+
+- name: download aws_ec2metadata_url
+  get_url:
+    url: "{{ aws_ec2metadata_url }}"
+    dest: /usr/local/bin/ec2-metadata
+    mode: 0755
+  when: aws_ec2metadata_enabled

@@ -1,2 +1,3 @@
 ---
 aws_ecscli_url: https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+aws_ec2metadata_url: http://s3.amazonaws.com/ec2metadata/ec2-metadata

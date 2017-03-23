@@ -4,3 +4,4 @@ awsebcli_state: latest
 
 aws_eb_cli_enabled: true
 aws_ecs_cli_enabled: true
+aws_ec2metadata_enabled: false
