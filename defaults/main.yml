@@ -1,7 +1,20 @@
 ---
+# AWS CLI
 awscli_state: latest
-awsebcli_state: latest
 
-aws_eb_cli_enabled: true
+# AWS ECS CLI
 aws_ecs_cli_enabled: true
+
+# AWS Elastic Beanstalk CLI
+awsebcli_state: latest
+aws_eb_cli_enabled: true
+
+# AWS EC2 metadata client
+# see http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-retrieval
+# and https://aws.amazon.com/code/1825
 aws_ec2metadata_enabled: false
+
+# Unix users list to install bash or zsh autocompletion
+aws_cli_users: []
+aws_cli_bash_autocompletion: false
+aws_cli_zsh_autocompletion: false
