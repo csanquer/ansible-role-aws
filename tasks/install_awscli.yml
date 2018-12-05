@@ -1,17 +1,17 @@
 ---
 - name: install AWS CLI
-  pip: >
-    executable="{{ python_2_pip_bin|default('pip') }}"
-    name=awscli
-    extra_args="{{ '-U' if awscli_state == 'latest' else '' }}"
-    state=present
+  pip:
+    executable: "{{ python_2_pip_bin|default('pip') }}"
+    name: awscli
+    extra_args: "{{ '-U' if awscli_state == 'latest' else '' }}"
+    state: present
 
 - name: install AWS Beanstalk cli
-  pip: >
-    executable="{{ python_2_pip_bin|default('pip') }}"
-    name=awsebcli
-    extra_args="{{ '-U' if awsebcli_state == 'latest' else '' }}"
-    state=present
+  pip:
+    executable: "{{ python_2_pip_bin|default('pip') }}"
+    name: awsebcli
+    extra_args: "{{ '-U' if awsebcli_state == 'latest' else '' }}"
+    state: present
   when: aws_eb_cli_enabled
 
 - name: install AWS ECS cli
@@ -32,12 +32,12 @@
   lineinfile:
     dest: "/home/{{ item }}/.bashrc"
     line: "complete -C '/usr/local/bin/aws_completer' aws"
-  with_items: "{{ aws_cli_users }}"
+  loop: "{{ aws_cli_users }}"
   when: aws_cli_bash_autocompletion
 
 - name: install zsh autocompletion for AWS CLI
   lineinfile:
     dest: "/home/{{ item }}/.zshrc"
     line: "source /usr/local/bin/aws_zsh_completer.sh"
-  with_items: "{{ aws_cli_users }}"
+  loop: "{{ aws_cli_users }}"
   when: aws_cli_zsh_autocompletion
