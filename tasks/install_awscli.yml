@@ -1,14 +1,14 @@
 ---
 - name: install AWS CLI
   pip:
-    executable: "{{ python_2_pip_bin|default('pip') }}"
+    executable: "{{ aws_python_pip_bin|default('pip3') }}"
     name: awscli
     extra_args: "{{ '-U' if awscli_state == 'latest' else '' }}"
     state: present
 
 - name: install AWS Beanstalk cli
   pip:
-    executable: "{{ python_2_pip_bin|default('pip') }}"
+    executable: "{{ aws_python_pip_bin|default('pip3') }}"
     name: awsebcli
     extra_args: "{{ '-U' if awsebcli_state == 'latest' else '' }}"
     state: present

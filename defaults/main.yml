@@ -1,4 +1,6 @@
 ---
+aws_python_pip_bin: pip3
+
 # AWS CLI
 awscli_state: latest
 
