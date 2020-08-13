@@ -1,0 +1,30 @@
+---
+- name: install AWS CLI v1
+  include: install_awscli_v1.yml
+  when: aws_cli_major_version|default(1) == 1
+
+- name: install AWS CLI v2
+  include: install_awscli_v2.yml
+  when: aws_cli_major_version|default(1) >= 2
+
+- name: install AWS Beanstalk cli
+  pip:
+    executable: "{{ aws_python_pip_bin|default('pip3') }}"
+    name: awsebcli
+    extra_args: "{{ '-U' if awsebcli_state == 'latest' else '' }}"
+    state: present
+  when: aws_eb_cli_enabled|bool
+
+- name: install AWS ECS cli
+  get_url:
+    url:  "{{ aws_ecscli_url }}"
+    dest: /usr/local/bin/ecs-cli
+    mode: 0755
+  when: aws_ecs_cli_enabled|bool
+
+- name: download ec2-metadata
+  get_url:
+    url: "{{ aws_ec2metadata_url }}"
+    dest: /usr/local/bin/ec2-metadata
+    mode: 0755
+  when: aws_ec2metadata_enabled|bool

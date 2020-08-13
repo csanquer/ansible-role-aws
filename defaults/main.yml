@@ -1,8 +1,19 @@
 ---
 aws_python_pip_bin: pip3
 
-# AWS CLI
+aws_cli_major_version: 2
+
+# AWS CLI v2
+aws_cli_v2_path: /usr/local/aws-cli
+aws_cli_v2_bin_path: /usr/local/bin
+
+# AWS CLI v1
 awscli_state: latest
+
+# Unix users list to install bash or zsh autocompletion
+aws_cli_users: []
+aws_cli_bash_autocompletion: false
+aws_cli_zsh_autocompletion: false
 
 # AWS ECS CLI
 aws_ecs_cli_enabled: true
@@ -15,8 +26,3 @@ aws_eb_cli_enabled: true
 # see http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-retrieval
 # and https://aws.amazon.com/code/1825
 aws_ec2metadata_enabled: false
-
-# Unix users list to install bash or zsh autocompletion
-aws_cli_users: []
-aws_cli_bash_autocompletion: false
-aws_cli_zsh_autocompletion: false

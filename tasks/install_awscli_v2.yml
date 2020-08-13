@@ -1,0 +1,42 @@
+---
+- name: download AWS CLI v2
+  get_url:
+    url: "{{ aws_cli_v2_url }}"
+    dest: /opt/awscliv2.zip
+    mode: 'u=rw,g=r,o=r'
+    force: "{{ 'yes' if awscli_state else 'no' }}"
+
+- name: create directory for AWS CLI v2 installer
+  file:
+    path: /opt/awscliv2
+    state: directory
+    mode: 'u=rwx,g=rx,o=rx'
+
+- name: extract AWS CLI v2
+  unarchive:
+    src: /opt/awscliv2.zip
+    dest: /opt/awscliv2
+
+- name: install AWS CLI v2
+  command: "/opt/awscliv2/aws/install -u -i {{ aws_cli_v2_path }} -b {{ aws_cli_v2_bin_path }}"
+
+- name: install bash autocompletion for AWS CLI v2
+  lineinfile:
+    dest: "/home/{{ item }}/.bashrc"
+    line: "complete -C '{{ aws_cli_v2_bin_path }}/aws_completer' aws"
+  loop: "{{ aws_cli_users }}"
+  when: aws_cli_bash_autocompletion|bool
+
+- name: install bash autocompletion compatibility for zsh
+  lineinfile:
+    dest: "/home/{{ item }}/.zshrc"
+    line: "autoload bashcompinit && bashcompinit"
+  loop: "{{ aws_cli_users }}"
+  when: aws_cli_zsh_autocompletion|bool
+
+- name: install zsh autocompletion for AWS CLI v2
+  lineinfile:
+    dest: "/home/{{ item }}/.zshrc"
+    line: "complete -C '{{ aws_cli_v2_bin_path }}/aws_completer' aws"
+  loop: "{{ aws_cli_users }}"
+  when: aws_cli_zsh_autocompletion|bool
