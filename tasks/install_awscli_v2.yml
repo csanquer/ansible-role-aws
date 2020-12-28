@@ -23,7 +23,7 @@
 - name: install bash autocompletion for AWS CLI v2
   lineinfile:
     dest: "/home/{{ item }}/.bashrc"
-    line: "complete -C '{{ aws_cli_v2_bin_path }}/aws_completer' aws"
+    line: "complete -C '{{ aws_cli_v2_path }}/v2/current/bin/aws_completer' aws"
   loop: "{{ aws_cli_users }}"
   when: aws_cli_bash_autocompletion|bool
 
@@ -37,6 +37,6 @@
 - name: install zsh autocompletion for AWS CLI v2
   lineinfile:
     dest: "/home/{{ item }}/.zshrc"
-    line: "complete -C '{{ aws_cli_v2_bin_path }}/aws_completer' aws"
+    line: "complete -C '{{ aws_cli_v2_path }}/v2/current/bin/aws_completer' aws"
   loop: "{{ aws_cli_users }}"
   when: aws_cli_zsh_autocompletion|bool
